@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoryModule } from './cases/categories/category.module';
+import { SpotModule } from './cases/spots/spot.module';
+import { ProductModule } from './cases/products/product.module';
 
 @Module({
   imports: [
@@ -21,11 +24,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           schema: dbschema,
           autoLoadEntities: true,
           synchronize: true,
+          ssl: false
         };
       },
     }),
+    CategoryModule,
+    ProductModule,
+    SpotModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
