@@ -25,9 +25,9 @@ export class OrderController {
         return this.service.findOne(id); 
     }
 
-    // pacht ou pucht vai cair na prova a diferença
+    // patch ou put vai cair na prova a diferença
     @Patch(':id/status')
     updateStatus(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateOrderStatusDto): Promise<Order>{
-        return this.service,this.updateStatus(id, dto);
+        return this.service.updateStatus(id, dto);
     }
 }
