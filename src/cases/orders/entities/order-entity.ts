@@ -6,7 +6,7 @@ export enum OrderStatus {
     NEW = 'NEW',
     PREPARING = 'PREPARING',
     READY = 'READY',
-    DELIVERY = 'DELIVERY',
+    DELIVERED = 'DELIVERED',
 }
 
 @Entity()
