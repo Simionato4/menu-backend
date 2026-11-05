@@ -10,4 +10,10 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
         @Column({type: 'boolean', default: true})
         active: boolean;
+
+        @Column({type: 'text', nullable: true})
+        icon?: string;
+
+        @Column({name: 'display_order', type: 'integer', default: 0})
+        displayOrder: number;
     }

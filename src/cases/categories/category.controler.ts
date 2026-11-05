@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPi
 import { Category } from "./category.entity";
 import { CategoryService } from "./category.service";
 import { CreateCategoryDto } from "./dto/create-category";
+import { UpdateCategoryDto } from "./dto/update-category";
 
 @Controller('categories')
 export class CategoryController {
@@ -34,7 +35,7 @@ export class CategoryController {
         @Param('id', ParseUUIDPipe)
         id: string,
         @Body()
-        dto: CreateCategoryDto
+        dto: UpdateCategoryDto
     ): Promise<Category> {
         return this.service.update(id, dto);
     }
