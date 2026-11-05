@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPi
 import { Product } from "./product.entity";
 import { ProductService } from "./product.service";
 import { CreateProductDto } from "./dto/create-product";
+import { UpdateProductDto } from "./dto/update-product";
 
 @Controller('products')
 export class ProductController {
@@ -34,7 +35,7 @@ export class ProductController {
         @Param('id', ParseUUIDPipe)
         id: string,
         @Body()
-        dto: CreateProductDto
+        dto: UpdateProductDto
     ): Promise<Product> {
         return this.service.update(id, dto);
     }

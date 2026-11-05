@@ -21,6 +21,12 @@ import { Category } from "../categories/category.entity";
         @Column({type: 'text', nullable: true})
         picture?: string;
 
+        @Column({type: 'boolean', default: false})
+        vegetarian: boolean;
+
+        @Column({name: 'is_new', type: 'boolean', default: false})
+        isNew: boolean;
+
         @ManyToOne(() => Category, {nullable: true})
         @JoinColumn({name: 'category_id'})
         category: Category | null;

@@ -25,4 +25,12 @@ export class CreateProductDto {
     @IsOptional()
     @IsUrl({ require_protocol: true })
     picture?: string;
+
+    @IsOptional()
+    @IsBoolean()
+    vegetarian?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    isNew?: boolean;
 }

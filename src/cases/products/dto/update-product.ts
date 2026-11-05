@@ -26,4 +26,12 @@ export class UpdateProductDto {
     @IsOptional()
     @IsUrl({ require_protocol: true })
     picture?: string;
+
+    @IsOptional()
+    @IsBoolean()
+    vegetarian?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    isNew?: boolean;
 }
