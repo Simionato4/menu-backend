@@ -4,6 +4,7 @@ import { BadRequestException, ConflictException, Injectable, NotFoundException }
 import { GuestCheck, GuestCheckStatus } from "./guest-check.entity";
 import { CreateGuestCheckDto } from "./dto/create-guest-check";
 import { Spot } from "../spots/spot.entity";
+import { GuestCheckWithTotal } from "./dto/guest-check-with-total";
 
 @Injectable()
 export class GuestCheckService {
@@ -50,8 +51,27 @@ export class GuestCheckService {
         
     }
 
+    async findAll(status?: GuestCheckStatus): Promise<GuestCheckWithTotal[]> {
+        const guestChecks = await this.guestCheckRepository.find({
+            where: status ? { status } : {},
+            relations: { spot: true, orders: true },
+            order: { createdAt: 'ASC' }
+        });
+
+        return guestChecks.map((guestCheck) => ({
+            id: guestCheck.id,
+            createdAt: guestCheck.createdAt,
+            status: guestCheck.status,
+            spot: guestCheck.spot,
+            total: guestCheck.orders.reduce((sum, order) => sum + Number(order.total), 0)
+        }));
+    }
+
     async findOne(id: string): Promise<GuestCheck> {
-        const guestCheck = await this.guestCheckRepository.findOneBy({ id });
+        const guestCheck = await this.guestCheckRepository.findOne({
+            where: { id },
+            relations: { spot: true }
+        });
      
         if (!guestCheck) {
             throw new NotFoundException(`Guest check with id ${id} not found`);

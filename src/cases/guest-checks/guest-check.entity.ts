@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Spot } from '../spots/spot.entity';
+import { Order } from '../orders/entities/order-entity';
 
 export enum GuestCheckStatus {
   OPENED = 'OPENED',
@@ -24,4 +25,7 @@ export class GuestCheck {
   @ManyToOne(() => Spot, { nullable: false })
   @JoinColumn({ name: 'spot_id' })
   spot: Spot;
+
+  @OneToMany(() => Order, (order) => order.guestCheck)
+  orders: Order[];
 }
