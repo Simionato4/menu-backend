@@ -34,7 +34,7 @@ export class SpotService {
         const spot = this.spotRepository.create({
             ...dto,
             name: dto.name,
-            active: true
+            active: dto.active ?? true
         });
 
         return this.spotRepository.save(spot);

@@ -13,6 +13,7 @@ import {
 import { Spot } from './spot.entity';
 import { SpotService } from './spot.service';
 import { CreateSpotDto } from './dto/create-spot';
+import { UpdateSpotDto } from './dto/update-spot';
 
 @Controller('spots')
 export class SpotController {
@@ -44,7 +45,7 @@ export class SpotController {
     @Param('id', ParseUUIDPipe)
     id: string,
     @Body()
-    dto: CreateSpotDto,
+    dto: UpdateSpotDto,
   ): Promise<Spot> {
     return this.service.update(id, dto);
   }
