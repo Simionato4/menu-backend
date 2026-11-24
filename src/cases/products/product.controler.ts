@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseBoolPipe, ParseUUIDPipe, Patch, Post, Query } from "@nestjs/common";
 import { Product } from "./product.entity";
 import { ProductService } from "./product.service";
 import { CreateProductDto } from "./dto/create-product";
@@ -12,9 +12,11 @@ export class ProductController {
     @Get()
     findAll(
         @Query('categoryId', new ParseUUIDPipe({ optional: true }))
-        categoryId?: string
+        categoryId?: string,
+        @Query('includeInactive', new ParseBoolPipe({ optional: true }))
+        includeInactive?: boolean
     ) : Promise<Product[]> {
-        return this.service.findAll(categoryId);
+        return this.service.findAll(categoryId, includeInactive);
     }
 
     @Get(':id')
